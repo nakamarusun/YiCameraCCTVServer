@@ -17,8 +17,13 @@ def createDirectory(dir: str) -> int:
             root = True
             dirList.pop(0)
 
+        if globals.verbose:
+            print("Operating system: Linux / Unix")
+            print("Creating directory in", dir)
+
         for num in range(len(dirList)):
             currentDir = ("/" if root else "") + "/".join(dirList[:(num + 1)])
+
             if not path.exists(currentDir):
                 makeDir = subprocess.Popen(["mkdir", currentDir],
                     stdout=subprocess.PIPE,
@@ -27,5 +32,8 @@ def createDirectory(dir: str) -> int:
                 mkdirCount += 1
                 if len(str(err)) > 5:
                     raise exceptions.ErrorMkdir("Error creating save directory. Please use sudo (Administrative rights).")
+                if globals.verbose: print("directory", currentDir, "initialized !")
+            else:
+                if globals.verbose: print("directory", currentDir, "already exist.")
 
-        return mkdirCount
+        if globals.verbose: print(mkdirCount, "Directories initialized.")

@@ -27,6 +27,7 @@ configFile.read( path + globals.osSlash + "settings.conf" )
 # Assign globals
 globals.savePath = str(configFile["DEFAULT"]["savepath"])
 globals.updateInterval = int(configFile["DEFAULT"]["interval"])
+globals.verbose = True if configFile["DEFAULT"]["verbose"] == "1" else False
 if globals.savePath == "":
     globals.folderPath = str(configFile["DEFAULT"]["savefolder"])
 else:
@@ -36,5 +37,6 @@ else:
 del configFile
 
 # mkdir directories
+if globals.verbose: print("Creating save directory")
 createDirectory(globals.folderPath)
 
