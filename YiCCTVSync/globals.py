@@ -5,3 +5,9 @@ osSlash =  "\\"
 savePath: str = ""
 updateInterval: int = 0
 folderPath: str = ""
+verbose: bool = False
+
+# Format:
+# { "cctv1": [Hostname, ]
+# }
+cctv: dict = {}
