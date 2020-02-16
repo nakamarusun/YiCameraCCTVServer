@@ -9,6 +9,7 @@ import os
 from create_dirs import createDirectory
 import globals
 import exceptions
+from CCTV import CCTV
 
 
 if system == "Windows":
@@ -32,6 +33,11 @@ if globals.savePath == "":
     globals.folderPath = str(configFile["DEFAULT"]["savefolder"])
 else:
     globals.folderPath = globals.savePath + (globals.osSlash if globals.savePath[-1] != globals.osSlash else "") + str(configFile["DEFAULT"]["savefolder"])
+cctvSections = configFile.sections()
+for camera in cctvSections:
+    globals.cctvs.append( CCTV(camera,
+                        configFile.get(camera, "hostname"),
+                        configFile.get(camera, "folder")) )
 
 # Cleanup
 del configFile
