@@ -4,16 +4,17 @@ from configparser import ConfigParser
 import pathlib
 import subprocess
 from platform import system
+import os
 
 from create_dirs import createDirectory
 import globals
+import exceptions
 
-# Define the slash sign for os'es
+
 if system == "Windows":
     globals.osSlash = "\\"
 else:
     globals.osSlash = "/"
-
 
 # Create ConfigParser object to read conf file
 configFile = ConfigParser()
@@ -26,11 +27,14 @@ configFile.read( path + globals.osSlash + "settings.conf" )
 # Assign globals
 globals.savePath = str(configFile["DEFAULT"]["savepath"])
 globals.updateInterval = int(configFile["DEFAULT"]["interval"])
-globals.folderPath = globals.savePath + (globals.osSlash if globals.savePath[-1] != globals.osSlash else "") + str(configFile["DEFAULT"]["savefolder"])
 
-# mkdir directories
-createDirectory(globals.folderPath, globals.osSlash)
-
+if globals.savePath == "":
+    globals.folderPath = str(configFile["DEFAULT"]["savefolder"])
+else:
+    globals.folderPath = globals.savePath + (globals.osSlash if globals.savePath[-1] != globals.osSlash else "") + str(configFile["DEFAULT"]["savefolder"])
 
 # Cleanup
 del configFile
+
+# mkdir directories
+createDirectory(globals.folderPath)
