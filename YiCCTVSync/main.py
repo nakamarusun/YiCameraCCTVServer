@@ -6,13 +6,13 @@ import subprocess
 from platform import system
 
 from create_dirs import createDirectory
+import globals
 
 # Define the slash sign for os'es
 if system == "Windows":
-    osSlash = "\"
+    globals.osSlash = "\\"
 else:
-    osSlash = "/"
-
+    globals.osSlash = "/"
 
 
 # Create ConfigParser object to read conf file
@@ -20,19 +20,17 @@ configFile = ConfigParser()
 
 # Read the conf file
 path: str = str(pathlib.Path().absolute())
-configFile.read( path + osSlash + "settings.conf" )
+configFile.read( path + globals.osSlash + "settings.conf" )
 
 
-# Assign variables
-savePath: str = str(configFile["DEFAULT"]["savepath"])
-
-updateInterval: int = int(configFile["DEFAULT"]["interval"])
-folderPath: str = savePath + (osSlash if savePath[-1] != osSlash else "") + str(configFile["DEFAULT"]["savefolder"])
+# Assign globals
+globals.savePath = str(configFile["DEFAULT"]["savepath"])
+globals.updateInterval = int(configFile["DEFAULT"]["interval"])
+globals.folderPath = globals.savePath + (globals.osSlash if globals.savePath[-1] != globals.osSlash else "") + str(configFile["DEFAULT"]["savefolder"])
 
 # mkdir directories
-createDirectory(folderPath)
+createDirectory(globals.folderPath, globals.osSlash)
 
 
 # Cleanup
-del savePath
 del configFile
