@@ -10,6 +10,7 @@ from create_dirs import createDirectory
 import globals
 import exceptions
 from CCTV import CCTV
+from enums import Interval
 
 
 if system == "Windows":
@@ -27,7 +28,7 @@ configFile.read( path + globals.osSlash + "settings.conf" )
 
 # Assign globals
 globals.savePath = str(configFile["DEFAULT"]["savepath"])
-globals.updateInterval = int(configFile["DEFAULT"]["interval"])
+globals.updateInterval = configFile["DEFAULT"]["interval"]
 globals.verbose = True if configFile["DEFAULT"]["verbose"] == "1" else False
 if globals.savePath == "":
     globals.folderPath = str(configFile["DEFAULT"]["savefolder"])

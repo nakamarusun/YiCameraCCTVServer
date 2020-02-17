@@ -6,3 +6,4 @@ class Interval(Enum):
     HALFDAILY = 3
     HALFHOURLY = 4
     QUARTERHOURLY = 5
+    MINUTELY = 6
