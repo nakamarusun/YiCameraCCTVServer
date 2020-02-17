@@ -37,7 +37,7 @@ cctvSections = configFile.sections()
 for camera in cctvSections:
     globals.cctvs.append( CCTV(camera,
                         configFile.get(camera, "hostname"),
-                        configFile.get(camera, "folder")) )
+                        (globals.folderPath + globals.osSlash + configFile.get(camera, "folder")) ) )
 
 # Cleanup
 del configFile
@@ -49,3 +49,6 @@ createDirectory(globals.folderPath)
 
 # Initialize cctv directories
 if globals.verbose: print("Creating CCTV Directories..")
+
+for camera in globals.cctvs:
+    createDirectory(camera.getFolderName)
