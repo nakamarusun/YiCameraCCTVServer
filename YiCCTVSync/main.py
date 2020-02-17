@@ -43,6 +43,9 @@ for camera in cctvSections:
 del configFile
 
 # mkdir directories
-if globals.verbose: print("Creating save directory")
+if globals.verbose: print("Creating save directory..")
 createDirectory(globals.folderPath)
 
+
+# Initialize cctv directories
+if globals.verbose: print("Creating CCTV Directories..")
