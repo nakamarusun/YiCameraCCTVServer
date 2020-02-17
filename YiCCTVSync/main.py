@@ -5,6 +5,7 @@ import pathlib
 import subprocess
 from platform import system
 import os
+import sched, time
 
 from create_dirs import createDirectory
 import globals
@@ -12,6 +13,8 @@ import exceptions
 from CCTV import CCTV
 from enums import Interval
 
+
+print("[ Yi Camera Sync v0.1 ]")
 
 if system == "Windows":
     globals.osSlash = "\\"
@@ -24,7 +27,6 @@ configFile = ConfigParser()
 # Read the conf file
 path: str = str(pathlib.Path().absolute())
 configFile.read( path + globals.osSlash + "settings.conf" )
-
 
 # Assign globals
 globals.savePath = str(configFile["DEFAULT"]["savepath"])
@@ -42,6 +44,8 @@ for camera in cctvSections:
 
 # Cleanup
 del configFile
+del cctvSections
+del path
 
 # mkdir directories
 if globals.verbose: print("Creating save directory..")
