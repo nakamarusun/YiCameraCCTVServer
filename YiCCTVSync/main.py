@@ -11,6 +11,7 @@ from create_dirs import createDirectory
 import globals
 from CCTV import CCTV
 from enums import Interval
+from update_routine import updateRoutine
 
 
 print("[ Yi Camera Sync v0.1 ]")
@@ -59,4 +60,4 @@ for camera in globals.cctvs:
 
 # Update
 scheduler = sched.scheduler(time.time, time.sleep)
-scheduler.enter( Interval.getSecond(globals.updateInterval), 1,  )
+scheduler.enter( Interval.getSecond(globals.updateInterval), 1, updateRoutine)
