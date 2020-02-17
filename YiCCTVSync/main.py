@@ -9,7 +9,6 @@ import sched, time
 
 from create_dirs import createDirectory
 import globals
-import exceptions
 from CCTV import CCTV
 from enums import Interval
 
@@ -57,3 +56,7 @@ if globals.verbose: print("Creating CCTV Directories..")
 
 for camera in globals.cctvs:
     createDirectory(camera.getFolderName)
+
+# Update
+scheduler = sched.scheduler(time.time, time.sleep)
+scheduler.enter( Interval.getSecond(globals.updateInterval), 1,  )
