@@ -60,4 +60,9 @@ for camera in globals.cctvs:
 
 # Update
 scheduler = sched.scheduler(time.time, time.sleep)
-scheduler.enter( Interval.getSecond(globals.updateInterval), 1, updateRoutine)
+
+updateRoutine()
+
+while True:
+    scheduler.enter( Interval.getSecond(globals.updateInterval), 1, updateRoutine)
+    scheduler.run()
