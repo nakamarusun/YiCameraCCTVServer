@@ -5,6 +5,6 @@ osSlash =  "\\"
 savePath: str = ""
 updateInterval: int = 0
 folderPath: str = ""
-verbose: bool = False
+verbose: bool = True
 
 cctvs: list = []

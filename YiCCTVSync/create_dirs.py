@@ -20,6 +20,7 @@ def createDirectory(dir: str):
                 dirList.pop(0)
 
             if globals.verbose:
+                print("\n createDirectory")
                 print("Operating system: Linux / Unix")
                 print("Creating directory in", dir)
 

@@ -30,7 +30,7 @@ configFile.read( path + globals.osSlash + "settings.conf" )
 
 # Assign globals
 globals.savePath = str(configFile["DEFAULT"]["savepath"])
-globals.updateInterval = configFile["DEFAULT"]["interval"]
+globals.updateInterval = int(configFile["DEFAULT"]["interval"])
 globals.verbose = True if configFile["DEFAULT"]["verbose"] == "1" else False
 if globals.savePath == "":
     globals.folderPath = str(configFile["DEFAULT"]["savefolder"])
@@ -58,7 +58,7 @@ createDirectory(globals.folderPath)
 if globals.verbose: print("Creating CCTV Directories..")
 
 for camera in globals.cctvs:
-    createDirectory(camera.getFolderName)
+    createDirectory(camera.getFolderName())
 
 # Update
 scheduler = sched.scheduler(time.time, time.sleep)
