@@ -79,6 +79,22 @@ def updateRoutine():
             for camFile in camCCTVFolders[camDir]:
                 if camFile not in currentServerDir:
                     fileDiffs.append( cctvDir + "/" + camDir + "/" + camFile )
+        
+        # Downloads file
+        for diff in fileDiffs:
+            directoryList = diff.split("/")
+
+            cwd: list = directoryList[:-1]
+            saveFile = directoryList[-2:]
+            fileName = directoryList[-1]
+
+            # Change working directory
+            ftp.cwd( "/".join(cwd) )
+
+            # Actually downloads the file.
+            with open(cams.getFolderName() + osSlash + saveFile, 'wb') as file:
+                ftp.retrbinary('RETR {}'.format(fileName), file.write)
 
         if verbose: print("\n{name}: The difference in files are:\n".format(name=name), fileDiffs)
         if verbose: print("{name}: Operation complete.".format(name=name))
+        

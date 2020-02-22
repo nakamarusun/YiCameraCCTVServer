@@ -6,6 +6,7 @@ import subprocess
 from platform import system
 import os
 import sched, time
+import datetime
 
 from create_dirs import createDirectory
 import globals
@@ -67,4 +68,5 @@ updateRoutine()
 
 while True:
     scheduler.enter( Interval.getSecond(globals.updateInterval), 1, updateRoutine)
+    print("Next update schedule: {}".format(datetime.datetime.now() + datetime.timedelta(seconds=Interval.getSecond(globals.updateInterval))))
     scheduler.run()
