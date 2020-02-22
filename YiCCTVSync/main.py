@@ -40,7 +40,9 @@ cctvSections = configFile.sections()
 for camera in cctvSections:
     globals.cctvs.append( CCTV(camera,
                         configFile.get(camera, "hostname"),
-                        (globals.folderPath + globals.osSlash + configFile.get(camera, "folder")) ) )
+                        (globals.folderPath + globals.osSlash + configFile.get(camera, "folder")),
+                        configFile.get(camera, "ftpLogin"),
+                        configFile.get(camera, "ftpPass") ) )
 
 # Cleanup
 del configFile
