@@ -1,6 +1,6 @@
 # Global variables for python file
 
-osSlash =  "\\"
+osSlash =  ""
 
 savePath: str = ""
 updateInterval: int = 0
